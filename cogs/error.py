@@ -37,8 +37,3 @@ class ErrorHandler(commands.Cog):
             await ctx.send("Invalid command. Type `?help` to get commands")
         else:
             raise error
-
-async def setup(bot : commands.Bot):
-    
-    await bot.add_cog(ErrorHandler(bot))
-    print("ErrorHandler cog loaded.")

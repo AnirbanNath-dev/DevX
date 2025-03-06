@@ -57,14 +57,14 @@ bot = DevX()
     
 async def load_cog():
     for list in os.listdir("cogs"):
-        if list.endswith(".py"):
+        if list == "__init__.py":
                 
              await bot.load_extension(f"cogs.{list[:-3]}")
         
     for dir in COGS:
         try:
             for fn in os.listdir(f"cogs/{dir}"):
-                if fn.endswith(".py"):
+                if fn == "__init__.py":
                     await bot.load_extension(f"cogs.{dir}.{fn[:-3]}")
         except FileNotFoundError:
             print(f"Error in loading {dir} cogs dir.")        

@@ -14,17 +14,11 @@ class Pause(commands.Cog):
         if not player:
             return
         
-        # Toggle pause
         await player.pause(not player.paused)
 
-        # Create an embed message
-        embedVar = discord.Embed(
+        embed = discord.Embed(
             title=f"Pause/Play",
             description=f"The Song is now {'paused' if player.paused else 'playing'}.",
             color=discord.Color.blue()
         )
-        await ctx.send(embed=embedVar)
-
-async def setup(bot : commands.Cog):
-    await bot.add_cog(Pause(bot))
-    print("Pause cog loaded.")
+        await ctx.send(embed=embed)

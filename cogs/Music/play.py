@@ -76,7 +76,3 @@ class Play(commands.Cog):
             await player.play(player.queue.get(), volume=30)
 
         
-
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Play(bot))
-    print("Play cog loaded.")

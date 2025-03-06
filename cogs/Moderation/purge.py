@@ -16,8 +16,3 @@ class Purge(commands.Cog):
         await asyncio.sleep(5)
         await msg.delete()
         
-
-async def setup(bot : commands.Bot):
-    
-    await bot.add_cog(Purge(bot))
-    print("Purge cog loaded.")

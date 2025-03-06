@@ -39,7 +39,3 @@ class Queue(commands.Cog):
         
         await ctx.send(embed=embed)
 
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Queue(bot))
-
-    print("Queue cog loaded.")

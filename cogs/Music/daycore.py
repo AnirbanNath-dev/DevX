@@ -42,7 +42,3 @@ class Daycore(commands.Cog):
         
         await ctx.message.add_reaction("\u2705")
         
-
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Daycore(bot))
-    print("Daycore cog loaded.")

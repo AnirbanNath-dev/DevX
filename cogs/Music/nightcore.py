@@ -42,7 +42,3 @@ class Nightcore(commands.Cog):
 
         await ctx.message.add_reaction("\u2705")
         
-
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Nightcore(bot))
-    print("Nightcore cog loaded.")

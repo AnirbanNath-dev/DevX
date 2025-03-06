@@ -25,8 +25,3 @@ class Loop(commands.Cog):
             color=discord.Color.red()
         )
         await ctx.send(embed=embedVar)
-
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Loop(bot))
-
-    print("Loop cog loaded.")

@@ -8,8 +8,3 @@ class Dm(commands.Cog):
         self.bot = bot
         
         
-
-async def setup(bot : commands.Bot):
-    
-    await bot.add_cog(Dm(bot))
-    print("Dm cog loaded.")

@@ -20,14 +20,10 @@ class Skip(commands.Cog):
         await player.skip(force=True)
         await ctx.message.add_reaction("\u2705")
 
-        # Create an embed message
-        embedVar = discord.Embed(
+        embed = discord.Embed(
             title="Song Skipped",
             description=f"The song **{current_track if current_track else ""}** has been skipped.",
             color=discord.Color.red()
         )
-        await ctx.send(embed=embedVar)
+        await ctx.send(embed=embed)
 
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Skip(bot))
-    print("Skip cog loaded.")

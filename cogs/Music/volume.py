@@ -37,7 +37,3 @@ class Volume(commands.Cog):
             await ctx.send(embed=embedVar)
         else:
             await ctx.send("Please enter a volume value between 10 and 200.")
-
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Volume(bot))
-    print("Volume cog loaded.")

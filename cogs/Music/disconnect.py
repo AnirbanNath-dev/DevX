@@ -17,7 +17,3 @@ class Disconnect(commands.Cog):
         await player.disconnect()
         await ctx.message.add_reaction("\u2705")
 
-
-async def setup(bot : commands.Bot):
-    await bot.add_cog(Disconnect(bot))
-    print("Disconnect cog loaded.")
