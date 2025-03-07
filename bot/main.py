@@ -12,6 +12,7 @@ from postgres.db import setup_db , close_db
 from asyncpg import Connection
 import wavelink
 from bot.utils.music_player import MusicPlayer
+from asyncio import sleep
 
 class DevX(commands.Bot):
     def __init__(self):
@@ -78,7 +79,19 @@ async def on_message(message : discord.Message):
         return
     
     await bot.process_commands(message)
+    
 
+@bot.event
+async def on_voice_state_update(member: discord.Member, before: discord.VoiceState, after: discord.VoiceState):
+
+    if member.guild.voice_client:
+        bot_voice_channel = member.guild.voice_client.channel 
+        
+        if bot_voice_channel and len(bot_voice_channel.members) == 1 and bot_voice_channel.members[0] == bot.user:
+            await bot_voice_channel.guild.voice_client.disconnect()
+            
+                
+            
 @bot.hybrid_command()
 async def sync(ctx: commands.Context):
 
