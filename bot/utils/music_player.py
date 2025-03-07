@@ -16,9 +16,9 @@ class MusicPlayer():
     
     def __init__(self):
         self.previous_now_playing_message : discord.Message = None
-
+        
     
-    async def track_start(self , payload : TrackStartEventPayload) -> None:
+    async def track_start(self , payload : TrackStartEventPayload , requester : discord.User | None) -> None:
         player : Player | None = payload.player
         
         if not player:
@@ -40,9 +40,9 @@ class MusicPlayer():
         if track.artwork:
             embed.set_thumbnail(url=track.artwork)
 
-        pause = Pause()
-        resume = Resume()
-        skip = Skip()
+        pause = Pause(requester)
+        resume = Resume(requester)
+        skip = Skip(requester)
 
         views = discord.ui.View()
         views.add_item(pause)

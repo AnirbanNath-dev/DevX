@@ -17,6 +17,7 @@ class DevX(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix=PREFIX , intents=discord.Intents.all())
         self.music_player = MusicPlayer()
+        self.user_playing = {}
 
     async def on_ready(self) -> None:
 
@@ -27,7 +28,7 @@ class DevX(commands.Bot):
         
     async def setup_hook(self):
         
-        nodes = [wavelink.Node(uri=WAVELINK_URI, password=WAVELINK_PASS)]
+        nodes = [wavelink.Node(uri=WAVELINK_URI, password=WAVELINK_PASS , inactive_player_timeout=60)]
         await wavelink.Pool.connect(nodes=nodes, client=self)
     
     async def on_wavelink_node_ready(
@@ -38,7 +39,8 @@ class DevX(commands.Bot):
     async def on_wavelink_track_start(
         self, payload: wavelink.TrackStartEventPayload
     ) -> None:
-        await self.music_player.track_start(payload)
+        requester = self.user_playing.get(payload.player.guild.id)
+        await self.music_player.track_start(payload , requester)
 
 
     async def on_wavelink_inactive_player(
