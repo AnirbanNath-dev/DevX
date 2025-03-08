@@ -14,7 +14,6 @@ class Skip(commands.Cog):
         if not player:
             return
 
-        # Get the current track before skipping
         current_track = player.current
 
         await player.skip(force=True)

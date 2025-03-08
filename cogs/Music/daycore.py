@@ -2,6 +2,7 @@ from typing import cast
 import wavelink
 from discord.ext import commands
 import discord
+from bot.settings import PREFIX
 
 class Daycore(commands.Cog):
     def __init__(self, bot : commands.Bot):
@@ -16,12 +17,12 @@ class Daycore(commands.Cog):
             return
 
         if mode is None:
-            embedVar = discord.Embed(
+            embed = discord.Embed(
                 title="Daycore Command",
-                description="Use ``?daycore on`` to turn on daycore mode or ``?daycore off`` to turn it off.",
+                description=f"Use ``{PREFIX}daycore on`` to turn on daycore mode or ``{PREFIX}daycore off`` to turn it off.",
                 color=discord.Color.blue()
             )
-            await ctx.send(embed=embedVar)
+            await ctx.send(embed=embed)
             return
         
         if mode.lower() == "on":
@@ -37,7 +38,7 @@ class Daycore(commands.Cog):
             await player.set_filters(filters)
             
         else:
-            await ctx.send("Invalid mode. Please use '?daycore on' or '?daycore off'.")
+            await ctx.send(f"Invalid mode. Please use '{PREFIX}daycore on' or '{PREFIX}daycore off'.")
             return
         
         await ctx.message.add_reaction("\u2705")

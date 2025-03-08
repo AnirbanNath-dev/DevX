@@ -3,6 +3,7 @@ from discord.ext import commands
 import discord
 import wavelink
 from bot.main import DevX
+from bot.settings import PREFIX
 
 class Play(commands.Cog):
     def __init__(self, bot : DevX):
@@ -11,23 +12,23 @@ class Play(commands.Cog):
     @commands.command()
     async def play(self, ctx: commands.Context, *, query: str = None) -> None:
         if query is None:
-            embedVar = discord.Embed(
+            embed = discord.Embed(
                 title="Play Command Help",
-                description="The `?play` command allows you to play a song in the voice channel you're currently in. To use the command, type `?play` followed by the name of the song you want to play. For example, `?play Despacito`.",
+                description=f"The `{PREFIX}play` command allows you to play a song in the voice channel you're currently in. To use the command, type `{PREFIX}play` followed by the name of the song you want to play. For example, `{PREFIX}play Perfect`.",
                 color=discord.Color.blue()
             )
-            await ctx.send(embed=embedVar)
+            await ctx.send(embed=embed)
             return
 
         if not ctx.guild:
             return
 
         player: wavelink.Player
-        player = cast(wavelink.Player, ctx.voice_client)  # type: ignore
+        player = cast(wavelink.Player, ctx.voice_client) 
 
         if not player:
             try:
-                player = await ctx.author.voice.channel.connect(cls=wavelink.Player)  # type: ignore
+                player = await ctx.author.voice.channel.connect(cls=wavelink.Player) 
             except AttributeError:
                 await ctx.send(
                     "Please join a voice channel first before using this command."
@@ -62,19 +63,19 @@ class Play(commands.Cog):
         else:
             track: wavelink.Playable = tracks[0]
             await player.queue.put_wait(track)
-            embedVar = discord.Embed(
+            embed = discord.Embed(
                 title="Added to Queue",
                 description=f"`{track}` has been added to the queue."
             )
             if track.artwork:
-                embedVar.set_thumbnail(url=track.artwork)
+                embed.set_thumbnail(url=track.artwork)
             avatar = ctx.author.avatar
-            embedVar.set_footer(text=f"Requested by {ctx.author.name}" , icon_url=f"{avatar.url if avatar else "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b211152a-6401-4f44-b49f-ee7965baa89f/dgpr7mo-b0afe416-a4dd-419f-9cf5-05e32ba9aad7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2IyMTExNTJhLTY0MDEtNGY0NC1iNDlmLWVlNzk2NWJhYTg5ZlwvZGdwcjdtby1iMGFmZTQxNi1hNGRkLTQxOWYtOWNmNS0wNWUzMmJhOWFhZDcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.nAKsQX5faMJBGJ6-gYz_yLzI_jNZQNE8BCaKjlQiXi4"}")
-            await ctx.send(embed=embedVar)
+            embed.set_footer(text=f"Requested by {ctx.author.name}" , icon_url=f"{avatar.url if avatar else "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b211152a-6401-4f44-b49f-ee7965baa89f/dgpr7mo-b0afe416-a4dd-419f-9cf5-05e32ba9aad7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2IyMTExNTJhLTY0MDEtNGY0NC1iNDlmLWVlNzk2NWJhYTg5ZlwvZGdwcjdtby1iMGFmZTQxNi1hNGRkLTQxOWYtOWNmNS0wNWUzMmJhOWFhZDcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.nAKsQX5faMJBGJ6-gYz_yLzI_jNZQNE8BCaKjlQiXi4"}")
+            await ctx.send(embed=embed)
             await ctx.message.add_reaction("\u2705")
  
         if not player.playing:
-            # Play now since we aren't playing anything...
+            
             self.bot.user_playing[ctx.guild.id] = ctx.author
             await player.play(player.queue.get(), volume=30)
             

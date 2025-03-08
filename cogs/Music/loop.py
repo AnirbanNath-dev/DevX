@@ -2,6 +2,7 @@ from typing import cast
 import wavelink
 from discord.ext import commands
 import discord
+from bot.settings import PREFIX
 
 class Loop(commands.Cog):
     def __init__(self, bot : commands.Bot):
@@ -14,15 +15,17 @@ class Loop(commands.Cog):
         if not player:
             return
         if mode is None:
-            embedVar = discord.Embed(
+            embed = discord.Embed(
                 title="Loop Command",
-                description="Use ``?loop on`` to turn on loop mode or ``?loop off`` to turn it off.",
+                description=f"Use ``{PREFIX}loop on`` to turn on loop mode or ``{PREFIX}loop off`` to turn it off.",
                 color=discord.Color.blue()
             )
-            await ctx.send(embed=embedVar)
+            await ctx.send(embed=embed)
             return
-        # Get the current track before looping
+        
+        
         current_track = player.current
+
         
         if mode.lower() == "on":
             if player.queue.mode == wavelink.QueueMode.loop:
@@ -33,7 +36,7 @@ class Loop(commands.Cog):
             embed = discord.Embed(
                 title="Song Loop",
                 description=f"Turned on loop for **{current_track.title}**",
-                color=discord.Color.red()
+                color=discord.Color.green()
             )
             await ctx.send(embed=embed)
             
@@ -45,10 +48,10 @@ class Loop(commands.Cog):
             player.queue.mode = wavelink.QueueMode.normal
             embed = discord.Embed(
                 title="Song Loop",
-                description=f"Turned on loop for **{current_track.title}**",
+                description=f"Turned off loop for **{current_track.title}**",
                 color=discord.Color.red()
             )
             await ctx.send(embed=embed)
         else:
-            await ctx.send("Invalid mode. Please use '?loop on' or '?loop off'.")
+            await ctx.send(f"Invalid mode. Please use '{PREFIX}loop on' or '{PREFIX}loop off'.")
             

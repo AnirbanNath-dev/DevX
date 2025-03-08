@@ -2,6 +2,7 @@ from typing import cast
 import wavelink
 from discord.ext import commands
 import discord
+from bot.settings import PREFIX
 
 class Nightcore(commands.Cog):
     def __init__(self, bot : commands.Bot):
@@ -16,12 +17,12 @@ class Nightcore(commands.Cog):
             return
 
         if mode is None:
-            embedVar = discord.Embed(
+            embed = discord.Embed(
                 title="Nightcore Command",
-                description="Use ``?nightcore on`` to turn on nightcore mode or ``?nightcore off`` to turn it off.",
+                description=f"Use ``{PREFIX}nightcore on`` to turn on nightcore mode or ``{PREFIX}nightcore off`` to turn it off.",
                 color=discord.Color.blue()
             )
-            await ctx.send(embed=embedVar)
+            await ctx.send(embed=embed)
             return
         
         if mode.lower() == "on":
@@ -37,7 +38,7 @@ class Nightcore(commands.Cog):
             await player.set_filters(filters)
             
         else:
-            await ctx.send("Invalid mode. Please use '?nightcore on' or '?nightcore off'.")
+            await ctx.send(f"Invalid mode. Please use '{PREFIX}nightcore on' or '{PREFIX}nightcore off'.")
             return
 
         await ctx.message.add_reaction("\u2705")

@@ -34,8 +34,10 @@ class Queue(commands.Cog):
                 value="There are no upcoming songs in the queue.",
                 inline=False
             )
+            
+        avatar = ctx.author.avatar
         
-        embed.set_footer(text=f"Requested by {ctx.author.name}" , icon_url=ctx.author.avatar.url)
+        embed.set_footer(text=f"Requested by {ctx.author.name}" , icon_url=f"{avatar.url if avatar else "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b211152a-6401-4f44-b49f-ee7965baa89f/dgpr7mo-b0afe416-a4dd-419f-9cf5-05e32ba9aad7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2IyMTExNTJhLTY0MDEtNGY0NC1iNDlmLWVlNzk2NWJhYTg5ZlwvZGdwcjdtby1iMGFmZTQxNi1hNGRkLTQxOWYtOWNmNS0wNWUzMmJhOWFhZDcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.nAKsQX5faMJBGJ6-gYz_yLzI_jNZQNE8BCaKjlQiXi4"}")
         
         await ctx.send(embed=embed)
 

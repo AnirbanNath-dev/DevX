@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
+from bot.settings import PREFIX
 
 class ErrorHandler(commands.Cog):
     
@@ -12,13 +13,10 @@ class ErrorHandler(commands.Cog):
     async def on_app_command_error(self , interaction : discord.Interaction , error : app_commands.AppCommandError):
         
         if isinstance(error , commands.BotMissingPermissions):
-            await interaction.response.send_message(f"" , ephemeral=True)
-        elif isinstance(error , commands.NotOwner):
-            await interaction.response.send_message(f"" , ephemeral=True)
-        elif isinstance(error , commands.MissingPermissions):
-            await interaction.response.send_message(f"" , ephemeral=True)
+            await interaction.response.send_message(f"I don't have required permissions to `{interaction.command.name}`" , ephemeral=True)
 
-        
+        elif isinstance(error , commands.MissingPermissions):
+            await interaction.response.send_message(f"You don't have required permissions to `{interaction.command.name}`" , ephemeral=True)     
         else:
             raise error
         
@@ -27,13 +25,9 @@ class ErrorHandler(commands.Cog):
         
         if isinstance(error , commands.BotMissingPermissions):
             await ctx.send(f"I don't have required permissions to {ctx.command}")
-        elif isinstance(error , commands.NotOwner):
-            await ctx.send("Hmm , You looks suspicious for a reason!")
         elif isinstance(error , commands.MissingPermissions):
             await ctx.send("You don't have required permissions to execute the command!")
-        elif isinstance(error , commands.MissingRequiredArgument):
-            pass
         elif isinstance(error , commands.CommandNotFound):
-            await ctx.send("Invalid command. Type `?help` to get commands")
+            await ctx.send(f"Invalid command. Type `{PREFIX}help` to get commands")
         else:
             raise error

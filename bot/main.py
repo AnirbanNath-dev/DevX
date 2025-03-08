@@ -8,11 +8,9 @@ from bot.settings import (
     WAVELINK_URI
 )
 import os
-from postgres.db import setup_db , close_db
-from asyncpg import Connection
 import wavelink
 from bot.utils.music_player import MusicPlayer
-from asyncio import sleep
+
 
 class DevX(commands.Bot):
     def __init__(self):
@@ -24,7 +22,6 @@ class DevX(commands.Bot):
 
         self.remove_command("help")
         await load_cog()
-        self.db : Connection = await setup_db()
         print(f"Logged in as {self.user}")
         
     async def setup_hook(self):
@@ -114,7 +111,6 @@ async def shutdown(ctx : commands.Context):
         return await ctx.send(":( You need to be the developer of the bot to shut it down!")
     
     await ctx.send("Good bye!")
-    await close_db(bot.db)
     await bot.close()
 
 @bot.command()
