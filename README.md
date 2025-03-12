@@ -1,62 +1,23 @@
-# 🚀 DevX - Setup Guide (Windows)
+# 🎶 **DevX Music Bot**
 
-Welcome to the **DevX** project! Follow the steps below to quickly set up the project on your Windows machine.
+**DevX** is a powerful music bot built for your Discord server. It allows you to play music, add exciting effects like **Nightcore** and **Daycore** modes, and more, making your server even more entertaining and dynamic.
 
 ---
 
-## Steps to Set Up
+## Features
 
-### 1. Clone the Repository
-Start by cloning the **DevX** repository to your local machine:
+- **Play Music**: Play music from YouTube, SoundCloud, and other sources.
+- **Nightcore Mode**: Speed up the music and pitch it higher, creating a faster and more energetic version of the song.
+- **Daycore Mode**: Slow down the music and pitch it lower, creating a chilled-out and more relaxed version of the song.
+- **Queue Management**: Control the music queue, skip, pause, and queue up more tracks.
+  
+---
 
-```bash
-git clone https://github.com/AnirbanNath-dev/DevX.git
-```
+## Acknowledgements
 
-### 2. Navigate to the Project Directory
-Once cloned, move into the DevX directory:
+- **Lavalink**: The bot uses Lavalink for efficient and high-quality audio streaming.
+- **discord.py**: For interacting with the Discord API and building the bot.
 
-```bash
-cd DevX
-```
+---
 
-### 3. Create a Python Virtual Environment
-Create a virtual environment to isolate the project's dependencies:
-
-```bash
-python -m venv .venv
-```
-
-### 4. Activate the Virtual Environment
-Activate the virtual environment you just created:
-
-```bash
-.\.venv\Scripts\activate
-```
-
-### 5. Install Required Dependencies
-Now, install the necessary Python packages from the requirements.txt file:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 6. Download Lavalink .JAR File
-Download the latest Lavalink .jar file from [Lavalink GitHub](https://github.com/lavalink-devs/Lavalink)
- and place it inside the `lavalink` folder in your cloned repo.
-
-### 7. Start Lavalink
-Run Lavalink with the following command:
-
-```bash
-java -jar .\lavalink\Lavalink.jar
-```
-
-### 8. Run the Bot
-Finally, start the bot with this command:
-
-```bash
-python -m bot.main
-```
-
-
+Feel free to contribute or suggest new features via issues or pull requests!
