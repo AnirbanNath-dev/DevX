@@ -21,7 +21,7 @@ plugins:
         - WEBEMBEDDED 
 lavalink:
   plugins:
-      - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.5"
+      - dependency: "dev.lavalink.youtube:youtube-plugin:1.12.0"
         repository: "https://maven.lavalink.dev/releases" # Set to true if you want to use a snapshot version.
 
 #    - dependency: "com.github.example:example-plugin:1.0.0" # required, the coordinates of your plugin
